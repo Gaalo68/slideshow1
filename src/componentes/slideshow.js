@@ -1,10 +1,10 @@
 import React from "react";
-import img1 from './../img/1.jpg';
-import img2 from './../img/2.jpg';
-import img3 from './../img/3.jpg';
-import img4 from './../img/4.jpg';
-import {reactComponent as flechaIzquierda} from './../img/flechaIzquierda.svg';
-import {reactComponent as flechaDerecha} from './../img/flechaDerecha.svg';
+import img1 from './../img/1.jpeg';
+//import img2 from './../img/2.jpeg';
+//import img3 from './../img/3.jpeg';
+//import img4 from './../img/4.jpeg';
+import {ReactComponent as FlechaIzquierda} from './../img/FlechaIzquierda.svg';
+import {ReactComponent as FlechaDerecha} from './../img/FlechaDerecha.svg';
 
 const Slideshow = () => {
     return (
@@ -12,9 +12,7 @@ const Slideshow = () => {
             <div>
                 <a href="https://github.com/Gaalo68">
                     <img src={img1} alt=""/>
-                    <img src={img2} alt=""/>
-                    <img src={img3} alt=""/>
-                    <img src={img4} alt=""/>
+                    
                 </a>
                 <div>
                     <p>15% de descueto</p>
@@ -22,10 +20,10 @@ const Slideshow = () => {
             </div>
             <div>
                 <button>
-                    <flechaIzquierda/>
+                    <FlechaIzquierda/>
                 </button>
                 <button>
-                    <flechaDerecha/>
+                    <FlechaDerecha/>
                 </button>
             </div>
         </div>
