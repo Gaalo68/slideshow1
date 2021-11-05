@@ -9,13 +9,13 @@
 
 body {
     background: #ede9e7;
+    font-family: 'poppins', sans-serif;
 }
 
 main {
     max-width: 1000px;
-    margin: 800px auto; /*para centar el contenido*/
-    overflow: hidden;/*para q lo que este fuera de los
+    margin: 50px auto; /*para centar el contenido*/
+    overflow: hidden; /*para q lo que este fuera de los
     mil pixeles no aparezca en pantalla*/
-
 }
 
