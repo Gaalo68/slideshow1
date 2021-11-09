@@ -1,13 +1,15 @@
 import React, { useRef, useEffect } from "react";
 //useref nos pemrite acceder a las referencias que reempalzan el id
 //para que el codigo sea reutilizable
-import img1 from "./../img/1.jpeg";
-import img2 from "./../img/2.jpeg";
-import img3 from "./../img/3.jpeg";
-import img4 from "./../img/4.jpeg";
+import img1 from './../img/1.jpeg';
+import img2 from './../img/2.jpeg';
+import img3 from './../img/3.jpeg';
+import img4 from './../img/4.jpeg';
+
 import { ReactComponent as FlechaDerecha } from "./../img/FlechaIzquierda.svg";
 import { ReactComponent as FlechaIzquierda } from "./../img/FlechaDerecha.svg";
 import styled from "styled-components";
+
 
 //definimos funcion para slideShow que va a ser igual a una ref nueva
 //que por defecto tendra un valor nulo para que reciba datos desde cualquier
@@ -23,41 +25,43 @@ const Slideshow = () => {
   const siguiente = () => {
     //comprobamos que el slideshow tenga elementos//
     if (slideshow.current.children.length > 0) {
-        console.log('siguiente')
-        //obtenemnos el primer elemento del slideshow
-        const primerElemento = slideshow.current.children[0];
-        
-        slideshow.current.style.transition = `300ms ease-out all`;
-       
-        const tamañoSlide = slideshow.current.children[0].offsetWidth;
+      console.log("siguiente");
+      //obtenemnos el primer elemento del slideshow
+      const primerElemento = slideshow.current.children[0];
 
-         //vamos a mover el slideshow
-        slideshow.current.style.transform = `translateX(-${tamañoSlide}px)`;
+      slideshow.current.style.transition = `2000ms ease-out all`;
 
-        //esta funcion se ejecuta cuando la transicion de mover el slideshow acabe
-        const transicion = () => {
-            //reiniciamos la posicion del slideshow
-            slideshow.current.style.transition = 'none';
-            slideshow.current.style.transform = `translateX(0)`;
+      const tamañoSlide = slideshow.current.children[0].offsetWidth;
 
-            //tomamos el primer elemento y lo enviamos al final
-            //esto lo hace appendChild
-            slideshow.current.appendChild(primerElemento);
-        }
+      //vamos a mover el slideshow
+      slideshow.current.style.transform = `translateX(-${tamañoSlide}px)`;
 
-        //eventListener para cuando termina la animacion
-        slideshow.current.addEventListener('transitionend', transicion);
+      //esta funcion se ejecuta cuando la transicion de mover el slideshow acabe
+      const transicion = () => {
+        //reiniciamos la posicion del slideshow
+        slideshow.current.style.transition = "none";
+        slideshow.current.style.transform = `translateX(0)`;
+
+        //tomamos el primer elemento y lo enviamos al final
+        //esto lo hace appendChild
+        slideshow.current.appendChild(primerElemento);
+      };
+
+      //eventListener para cuando termina la animacion
+      slideshow.current.addEventListener('transitionend', transicion);
     }
-  }
-
+  };
 
   const anterior = () => {
     console.log("Anterior");
     if (slideshow.current.children.length > 0) {
       //obtenemos el ultimo elemento del slideshow
-      const index = slideshow.current.children.length -1;
+      const index = slideshow.current.children.length - 1;
       const ultimoElemento = slideshow.current.children[index];
-      slideshow.current.insertBefore(ultimoElemento,slideshow.current.firstChild);
+      slideshow.current.insertBefore(
+        ultimoElemento,
+        slideshow.current.firstChild
+      );
 
       slideshow.current.style.transition = "none";
 
@@ -65,31 +69,29 @@ const Slideshow = () => {
       slideshow.current.style.transform = `translateX(-${tamañoSlide}px)`;
 
       setTimeout(() => {
-        slideshow.current.transition = '300ms ease-out all';
+        slideshow.current.transition = "300ms ease-out all";
         slideshow.current.style.transform = `translateX(0)`;
-      }, 30);
+      }, 500);
     }
-  }
+  };
   //funcionm para darle intervalo a las imagenes y que pasen sin dar click
   useEffect(() => {
+    intervaloSlideshow.current = setInterval(() => {
+      siguiente();
+    }, 30);
+    //eliminamos los intervalos para cuando demos click
+    slideshow.current.addEventListener("mouseenter", () => {
+      //creamos una funcion para limpiar el intervalo
+      clearInterval("intervaloSlideshow.current");
+    });
+
+    //volvemos a iniciar el intervalo cuando saque el cursor del slideshow
+    slideshow.current.addEventListener("mouseleave", () => {
       intervaloSlideshow.current = setInterval(() => {
         siguiente();
-      }, 3000);
-      //eliminamos los intervalos para cuando demos click
-      slideshow.current.addEventListener('mouseenter', () =>{
-          //creamos una funcion para limpiar el intervalo
-          clearInterval('intervaloSlideshow.current');
-      });
-
-      //volvemos a iniciar el intervalo cuando saque el cursor del slideshow
-      slideshow.current.addEventListener('mouseleave', () =>{
-        intervaloSlideshow.current = setInterval(() => {
-            siguiente();
-          }, 3000);
-      });
+      }, 30);
+    });
   }, []);
-
-  
 
   return (
     <ContenedorPrincipal>
@@ -98,34 +100,34 @@ const Slideshow = () => {
           <a href="https://github.com/Gaalo68">
             <img src={img1} alt="" />
           </a>
-          <TextoSlide colorFondo="navy" colorTexto="#fff">
-            <p>15% de descueto</p>
-          </TextoSlide>
-        </Slide>
-        <Slide>
-          <a href="https://github.com/Gaalo68">
-            <img src={img2} alt="" />
-          </a>
-          <TextoSlide>
-            <p>15% de descueto</p>
-          </TextoSlide>
-        </Slide>
-        <Slide>
-          <a href="https://github.com/Gaalo68">
-            <img src={img3} alt="" />
-          </a>
           <TextoSlide>
             <p>15% de descuento</p>
           </TextoSlide>
-        </Slide>
-        <Slide>
-          <a href="https://github.com/Gaalo68">
-            <img src={img4} alt="" />
-          </a>
-          <TextoSlide>
-            <p>15% de descuento</p>
-          </TextoSlide>
-        </Slide>
+          </Slide>
+          <Slide>
+            <a href="https://github.com/Gaalo68">
+              <img src={img2} alt="" />
+            </a>
+            <TextoSlide>
+              <p>15% de descuento</p>
+            </TextoSlide>
+          </Slide>
+          <Slide>
+            <a href="https://github.com/Gaalo68">
+              <img src={img3} alt="" />
+            </a>
+            <TextoSlide>
+              <p>15% de descuento</p>
+            </TextoSlide>
+          </Slide>
+          <Slide>
+            <a href="https://github.com/Gaalo68">
+              <img src={img4} alt="" />
+            </a>
+            <TextoSlide>
+              <p>15% de descuento</p>
+            </TextoSlide>
+          </Slide>
       </ContenedorSlideshow>
       <Controles>
         <Boton onClick={anterior}>
@@ -137,7 +139,7 @@ const Slideshow = () => {
       </Controles>
     </ContenedorPrincipal>
   );
-}
+};
 
 const ContenedorPrincipal = styled.div`
   position: relative;
