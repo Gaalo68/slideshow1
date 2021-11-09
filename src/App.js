@@ -7,16 +7,16 @@ import styled from 'styled-components';
 
 const App = ( ) => {
   return (
-    <mainn>
+    <main>
       <Titulo>Productos destacados</Titulo>
       <Slideshow />
-    </mainn>
+    </main>
   );
 }
 
 const Titulo = styled.p`
   font-size: 20px;
-  font_weight: 700;
+  font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 30px;
 `;

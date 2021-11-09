@@ -14,7 +14,7 @@ body {
 
 main {
     max-width: 1000px;
-    margin: 50px auto; /*para centar el contenido*/
+    margin: 80px auto; /*para centar el contenido*/
     overflow: hidden; /*para q lo que este fuera de los
     mil pixeles no aparezca en pantalla*/
 }
