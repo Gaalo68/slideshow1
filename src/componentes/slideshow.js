@@ -20,37 +20,36 @@ import styled from "styled-components";
 
 const Slideshow = () => {
   const slideshow = useRef(null);
-  const intervaloSlideshow = useRef(null);
-
+  const intervaloSlideshow = useRef
+  
   const siguiente = () => {
     //comprobamos que el slideshow tenga elementos//
     if (slideshow.current.children.length > 0) {
-      console.log("siguiente");
-      //obtenemnos el primer elemento del slideshow
-      const primerElemento = slideshow.current.children[0];
+      //obtenemos el primer elemento del slideashow
+        const primerElemento = slideshow.current.children[0];
 
-      slideshow.current.style.transition = `2000ms ease-out all`;
+      slideshow.current.style.transition = `300ms ease-out all`;
 
       const tamañoSlide = slideshow.current.children[0].offsetWidth;
 
-      //vamos a mover el slideshow
-      slideshow.current.style.transform = `translateX(-${tamañoSlide}px)`;
+      //movemos el slideshow
+      slideshow.current.style.transform = `traslateX(-${tamañoSlide}px)`;
 
-      //esta funcion se ejecuta cuando la transicion de mover el slideshow acabe
       const transicion = () => {
         //reiniciamos la posicion del slideshow
-        slideshow.current.style.transition = "none";
-        slideshow.current.style.transform = `translateX(0)`;
+        slideshow.current.style.transition = 'none';
+        slideshow.current.style.transform = 'traslateX(0)';
 
         //tomamos el primer elemento y lo enviamos al final
-        //esto lo hace appendChild
+        //appendChild agrega un elemento al final
         slideshow.current.appendChild(primerElemento);
-      };
 
-      //eventListener para cuando termina la animacion
-      slideshow.current.addEventListener('transitionend', transicion);
+        slideshow.current.removeEventListener('transitionend'); 
+
+      //eventListener para cuando termine la animacion
+      slideshow.current.addEventeListener('transitionend', transicion);
     }
-  };
+  }
 
   const anterior = () => {
     console.log("Anterior");
@@ -62,6 +61,7 @@ const Slideshow = () => {
         ultimoElemento,
         slideshow.current.firstChild
       );
+    
 
       slideshow.current.style.transition = "none";
 
@@ -72,26 +72,26 @@ const Slideshow = () => {
         slideshow.current.transition = "300ms ease-out all";
         slideshow.current.style.transform = `translateX(0)`;
       }, 500);
-    }
-  };
+    
+    
+  
   //funcionm para darle intervalo a las imagenes y que pasen sin dar click
   useEffect(() => {
-    intervaloSlideshow.current = setInterval(() => {
+    intervaloSlideshow.current = setInterval(() =>{
       siguiente();
-    }, 30);
-    //eliminamos los intervalos para cuando demos click
-    slideshow.current.addEventListener("mouseenter", () => {
-      //creamos una funcion para limpiar el intervalo
-      clearInterval("intervaloSlideshow.current");
+    }, 5000);
+    //eliminamos los intervalos
+    slideshow.current.addEventListener('mouseenter', () => {
+      clearInterval(intervaloSlideshow.current);
     });
 
-    //volvemos a iniciar el intervalo cuando saque el cursor del slideshow
-    slideshow.current.addEventListener("mouseleave", () => {
-      intervaloSlideshow.current = setInterval(() => {
+    //volemos a poner el intervalo cuando saue el sursor del slideshow
+    slideshow.current.addEventListener('mouseleave', () => {
+      intervaloSlideshow.current = setInterval(() =>{
         siguiente();
-      }, 30);
-    });
-  }, []);
+      }, 5000);
+    }, []);
+  {
 
   return (
     <ContenedorPrincipal>
@@ -139,7 +139,9 @@ const Slideshow = () => {
       </Controles>
     </ContenedorPrincipal>
   );
-};
+  }
+
+  
 
 const ContenedorPrincipal = styled.div`
   position: relative;
@@ -216,6 +218,7 @@ const Boton = styled.button`
 
   ${(props) => (props.derecho ? "right: 0" : "left: 0")}
 `;
+
 
 export default Slideshow;
 
